@@ -7,6 +7,7 @@ import { Directive, ElementRef, AfterViewInit, HostListener, NgZone } from '@ang
 export class FitTextDirective implements AfterViewInit {
   private originalFontSize: number
   private resizeObserver: ResizeObserver
+  private mutationObserver: MutationObserver
 
   constructor(
     private el: ElementRef,
@@ -16,15 +17,25 @@ export class FitTextDirective implements AfterViewInit {
     this.resizeObserver = new ResizeObserver(() => {
       this.ngZone.run(() => this.fitText())
     })
+
+    this.mutationObserver = new MutationObserver(() => {
+      this.ngZone.run(() => this.fitText())
+    })
   }
 
   ngAfterViewInit() {
     this.resizeObserver.observe(this.el.nativeElement.parentElement)
+    this.mutationObserver.observe(this.el.nativeElement, {
+      characterData: true,
+      childList: true,
+      subtree: true,
+    })
     this.fitText()
   }
 
   ngOnDestroy() {
     this.resizeObserver.disconnect()
+    this.mutationObserver.disconnect()
   }
 
   @HostListener('window:resize')
