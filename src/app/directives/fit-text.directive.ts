@@ -4,7 +4,7 @@ import { Directive, ElementRef, AfterViewInit, HostListener, NgZone } from '@ang
   selector: '[fitText]',
   standalone: true,
 })
-export class FitTextDirectective implements AfterViewInit {
+export class FitTextDirective implements AfterViewInit {
   private originalFontSize: number
   private resizeObserver: ResizeObserver
 
