@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 import { DatePipe } from '@angular/common'
+import { FitTextDirectective } from './directives/fit-text.directive'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, DatePipe],
+  imports: [RouterOutlet, FormsModule, DatePipe, FitTextDirectective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -40,7 +41,15 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onDateChange(dateStr: string) {
-    this.targetDate = new Date(dateStr)
-    this.updateCountdown()
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/
+    if (!datePattern.test(dateStr)) {
+      return
+    }
+
+    const newDate = new Date(dateStr)
+    if (!isNaN(newDate.getTime())) {
+      this.targetDate = newDate
+      this.updateCountdown()
+    }
   }
 }
