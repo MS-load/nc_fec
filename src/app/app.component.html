@@ -1,6 +1,24 @@
-
 <main class="main">
-  <h1>Hello! 👋</h1>
+  <h1 class="display-text">Time to {{ title }}</h1>
+  <h1 class="date-counter">{{ countdown }}</h1>
+
+  <div class="inputs">
+    <input
+      [(ngModel)]="title"
+      type="text"
+      class="title-input"
+      aria-label="Event name"
+      placeholder="Event name"
+    />
+
+    <input
+      [ngModel]="targetDate | date: 'yyyy-MM-dd'"
+      (ngModelChange)="onDateChange($event)"
+      type="date"
+      class="counter-input"
+      aria-label="Target date"
+    />
+  </div>
 </main>
 
 <router-outlet />
