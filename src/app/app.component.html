@@ -3,21 +3,31 @@
   <h1 class="date-counter">{{ countdown }}</h1>
 
   <div class="inputs">
-    <input
-      [(ngModel)]="title"
-      type="text"
-      class="title-input"
-      aria-label="Event name"
-      placeholder="Event name"
-    />
+    <div>
+      <label for="event-name">Title</label>
+      <input
+        [(ngModel)]="title"
+        type="text"
+        class="title-input"
+        id="event-name"
+        aria-label="Event name"
+        placeholder="Event name"
+      />
+    </div>
 
-    <input
-      [ngModel]="targetDate | date: 'yyyy-MM-dd'"
-      (ngModelChange)="onDateChange($event)"
-      type="date"
-      class="counter-input"
-      aria-label="Target date"
-    />
+    <div>
+      <label for="target-date">Date</label>
+      <input
+        [ngModel]="targetDate | date: 'yyyy-MM-dd'"
+        (ngModelChange)="onDateChange($event)"
+        type="text"
+        pattern="\d{4}-\d{2}-\d{2}"
+        placeholder="YYYY-MM-DD"
+        class="counter-input"
+        id="target-date"
+        aria-label="Target date"
+      />
+    </div>
   </div>
 </main>
 
