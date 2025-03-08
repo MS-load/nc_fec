@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 import { DatePipe } from '@angular/common'
 import { FitTextDirective } from './directives/fit-text.directive'
+import { EventStorageService } from './services/event-storage.service'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-root',
@@ -12,19 +14,30 @@ import { FitTextDirective } from './directives/fit-text.directive'
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Midsummer Eve'
-  targetDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+  title = ''
+  targetDate = new Date()
   countdown = ''
   private timer!: ReturnType<typeof setInterval>
+  private subscription!: Subscription
+
+  constructor(private eventStorage: EventStorageService) {}
 
   ngOnInit() {
-    this.updateCountdown()
+    this.subscription = this.eventStorage.eventData$.subscribe(data => {
+      this.title = data.title
+      this.targetDate = data.targetDate
+      this.updateCountdown()
+    })
+
     this.timer = setInterval(() => this.updateCountdown(), 1000)
   }
 
   ngOnDestroy() {
     if (this.timer) {
       clearInterval(this.timer)
+    }
+    if (this.subscription) {
+      this.subscription.unsubscribe()
     }
   }
 
@@ -48,8 +61,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const newDate = new Date(dateStr)
     if (!isNaN(newDate.getTime())) {
-      this.targetDate = newDate
-      this.updateCountdown()
+      this.eventStorage.updateEventData({ targetDate: newDate })
     }
+  }
+
+  onTitleChange(newTitle: string) {
+    this.eventStorage.updateEventData({ title: newTitle })
   }
 }
