@@ -12,7 +12,7 @@ npm run start
 
 # Web page
 
-[https://frontend-challenge-2025-03-11.netlify.app/](https://frontend-challenge-2025-03-11.netlify.app/)
+[https://ms-load.github.io/nc_fec/](NC_FEC)
 
 # Description
 
