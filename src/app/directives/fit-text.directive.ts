@@ -48,21 +48,17 @@ export class FitTextDirective implements AfterViewInit {
     const container = element.parentElement
     let fontSize = this.originalFontSize
 
+    fontSize = 1
     element.style.fontSize = `${fontSize}px`
 
-    let min = 0
-    let max = fontSize
-
-    while (min <= max) {
-      fontSize = Math.floor((min + max) / 2)
+    while (element.scrollWidth <= container.clientWidth) {
+      fontSize++
       element.style.fontSize = `${fontSize}px`
 
-      if (element.scrollWidth > container.clientWidth) {
-        max = fontSize - 1
-      } else {
-        min = fontSize + 1
-      }
+      if (fontSize > 1000) break
     }
-    element.style.fontSize = `${max}px`
+
+    fontSize--
+    element.style.fontSize = `${fontSize}px`
   }
 }
