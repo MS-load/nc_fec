@@ -1,9 +1,13 @@
 <main class="main">
   <div class="container">
-    <h1 class="display event-title" fitText>Time to {{ title }}</h1>
+    <h1 class="display event-title" fitText>Time {{ isComplete ? 'since' : 'to' }} {{ title }}</h1>
   </div>
   <div class="container">
     <h1 class="display event-countdown" fitText>{{ countdown }}</h1>
+  </div>
+
+  <div *ngIf="isComplete" class="container">
+    <p class="display event-countdown complete" fitText>Event has started !!</p>
   </div>
 
   <div class="inputs">

@@ -5,11 +5,12 @@ import { DatePipe } from '@angular/common'
 import { FitTextDirective } from './directives/fit-text.directive'
 import { EventStorageService } from './services/event-storage.service'
 import { Subscription } from 'rxjs'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, DatePipe, FitTextDirective],
+  imports: [RouterOutlet, FormsModule, DatePipe, FitTextDirective, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   countdown = ''
   private timer!: ReturnType<typeof setInterval>
   private subscription!: Subscription
+  isComplete = false
 
   constructor(private eventStorage: EventStorageService) {}
 
@@ -45,12 +47,17 @@ export class AppComponent implements OnInit, OnDestroy {
     const now = new Date().getTime()
     const distance = this.targetDate.getTime() - now
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24))
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000)
+    this.isComplete = false
+    const absDistance = Math.abs(distance)
+    const days = Math.floor(absDistance / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((absDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((absDistance % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((absDistance % (1000 * 60)) / 1000)
 
     this.countdown = `${days} days, ${hours} h, ${minutes} m, ${seconds} s`
+    if (distance < 0) {
+      this.isComplete = true
+    }
   }
 
   onDateChange(dateStr: string) {
