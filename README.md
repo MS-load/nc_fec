@@ -18,7 +18,7 @@ npm run deploy
 
 # Web page
 
-[https://ms-load.github.io/nc_fec/](NC_FEC)
+[NC_FEC](https://ms-load.github.io/nc_fec/)
 
 # Description
 
