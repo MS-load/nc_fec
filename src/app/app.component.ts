@@ -76,3 +76,28 @@ export class AppComponent implements OnInit, OnDestroy {
     this.eventStorage.updateEventData({ title: newTitle })
   }
 }
+
+/* 
+font-size: 14px;
+font-family: Open Sauce One;
+font-weight: 400;
+line-height: 150%;
+letter - spacing: 0 %;
+
+font-size: 74px;
+font-family: Open Sauce One;
+font-weight: 400;
+line-height: 150%;
+letter - spacing: 0 %;
+
+font-size: 67px;
+font-family: Open Sauce One;
+font-weight: 800;
+line-height: 135.0000023841858%;
+letter - spacing: -2 %;
+
+
+border-color: #757575;
+border - width: 1px;
+
+gap 3 */
