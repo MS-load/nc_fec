@@ -28,8 +28,7 @@ main {
 
     &.event-title {
       color: $primary-color;
-      font-weight: bold;
-      letter-spacing: -2%;
+      font-weight: 800;
       line-height: 150%;
     }
 
@@ -42,7 +41,8 @@ main {
 }
 
 .inputs {
-  margin-top: 4rem;
+  margin-top: 6rem;
+  display: flex;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -61,7 +61,6 @@ main {
       top: -10px;
       left: 12px;
       display: block;
-      font-weight: 500;
       background-color: rgba(245, 243, 243, 1);
       padding: 0 4px;
     }

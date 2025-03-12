@@ -1,14 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: 'Open Sauce One';
-  src: url('./assets/fonts/OpenSauceOne-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/OpenSauceOne/OpenSauceOne-Regular.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Open Sauce One';
-  src: url('./assets/fonts/OpenSauceOne-ExtraBold.ttf') format('truetype');
-  font-style: bold;
+  src: url('./assets/fonts/OpenSauceOne/OpenSauceOne-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
 }
 
 body {
